@@ -16,5 +16,48 @@ echo "Plese run as Root User (sudo)"
 exit 1
 else
 fi
+#-------------------------------------------------------------------------------
+# Main Menu
+while true
+do
+    echo "================================================================"
+    echo -e "        ${YELLOW}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${ENDCOLOR}"
+    echo "================================================================"
+    echo "1.  Create User"
+    echo "2.  Delete User"
+    echo "3.  Change User Password"
+    echo "4.  Lock User"
+    echo "5.  Unlock User"
+    echo "6.  Add User to Group"
+    echo "7.  Remove User From Group"
+    echo "8.  User Information"
+    echo "9.  List Users"
+    echo "10. Exit"
+    echo "================================================================"
 
-#---------------------------------------------------------------------------- 
+    read -p "Enter your choice: " choice
+
+    case $choice in
+        1) create_user ;;
+        2) delete_user ;;
+        3) change_password ;;
+        4) lock_user ;;
+        5) unlock_user ;;
+        6) add_user_to_group ;;
+        7) remove_user_from_group ;;
+        8) user_info ;;
+        9) list_user ;;
+        10)
+            echo "Goodbye!"
+            exit 0
+            ;;
+        *)
+            echo -e "${RED}Invalid Choice!${ENDCOLOR}"
+            ;;
+    esac
+
+    echo
+    read -p "Press Enter To Continue..."
+done
+```
+
