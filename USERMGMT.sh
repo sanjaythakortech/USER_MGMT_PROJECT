@@ -14,7 +14,6 @@ if [ "$EUID"  -ne 0 ];
 then
 echo "Plese run as Root User (sudo)"
 exit 1
-else
 fi
 #-------------------------------------------------------------------------------
 # Main Menu
