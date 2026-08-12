@@ -1,19 +1,23 @@
 #!/bin/bash
 
-# Define Color Variables 
+# Define Color Variables
 RED='\e[31m'
 GREEN='\e[32m'
 YELLOW='\e[33m'
-BLUE='\e[34m' 
-ENDCOLOR='\e[0m'   
+BLUE='\e[34m'
+RESET='\e[0m'
+CYAN='\033[36m'
+BOLD='\e[1m'
+MAGENTA='\e[35m'
 
 #---------------------------------------------------------------------------
+
 #============================================================================
 # Check Root Or Note
 
 	if [ "$EUID"  -ne 0 ];
 	then
-	echo "Plese run as Root User (sudo)"
+	echo -e "${YELLOW}${BOLD}Please run as root (using sudo).${RESET}"
 	exit 1
 	fi
 #-------------------------------------------------------------------------------
@@ -23,12 +27,12 @@ ENDCOLOR='\e[0m'
 			read -p "Enter Username : " username
 	if id "$username" &>/dev/null;
 	then
-		echo "User already exists !"
+		echo -e "${YELLOW}${BOLD}User already exists.${RESET}"
 	else
-		useradd -m  "$username" 
+		useradd -m  "$username"
 		passwd "$username"
-		echo "User Created Successfully."
-		
+		echo -e "${GREEN}${BOLD}✓ User created successfully.${RESET}"
+
 	fi
 	}
 #----------------------------------------------------------------------------
@@ -37,14 +41,14 @@ ENDCOLOR='\e[0m'
     delete_user(){
                 read -p "Enter Username : " username
         if id "$username" &>/dev/null;
-        then   
+        then
                 userdel -r "$username"
-                echo "User Is Deleted..."
-        else    
-                echo "User Not found"
+               echo -e "${GREEN}${BOLD}✓ User deleted successfully.${RESET}"
+        else
+                echo -e "${RED}${BOLD}User not found.${RESET}"
         fi
     }
-#-------------------------------------------------------------------------------    
+#-------------------------------------------------------------------------------
 #============================================================================
 # 3 Change User Password Functin
     change_password(){
@@ -52,12 +56,12 @@ ENDCOLOR='\e[0m'
         if id "$username" &>/dev/null;
         then
             passwd "$username"
-            echo "Password Was Changed"
-        else    
-            echo "User Not Found"    
-         fi   
+            echo -e "${GREEN}${BOLD}✓ Password changed successfully.${RESET}"
+        else
+            echo -e "${RED}${BOLD}User not found.${RESET}"
+         fi
     }
-#-------------------------------------------------------------------------------     
+#------------------------------------------------------------------------------
 #============================================================================
 # 4 Lock User Functin
     lock_user() {
@@ -65,12 +69,12 @@ ENDCOLOR='\e[0m'
         if id "$username" &>/dev/null;
         then
             passwd -l "$username"
-            echo "User Is Locked"
-        else    
-            echo "User Not Found"    
-         fi   
+            echo -e "${GREEN}${BOLD}✓ User locked successfully.${RESET}"
+        else
+            echo -e "${RED}${BOLD}User not found.${RESET}"
+         fi
              }
-#-------------------------------------------------------------------------------              
+#----------------------------------------------------------------------------
 #============================================================================
 # 5 Unlock User Functin
  unlock_user() {
@@ -78,33 +82,33 @@ ENDCOLOR='\e[0m'
         if id "$username" &>/dev/null;
         then
             passwd -u "$username"
-            echo "User Is Unlocked"
-        else    
-            echo "User Not Found"    
-         fi   
+            echo -e "${GREEN}${BOLD}✓ User unlocked successfully.${RESET}"
+        else
+            echo -e "${RED}${BOLD}User not found.${RESET}"
+         fi
              }
-#-------------------------------------------------------------------------------              
+#-------------------------------------------------------------------------------
 #============================================================================
 # 6 Add User to Group Functin
  add_user_to_group() {
-                        read -p "Enter Username  : " username 
+                        read -p "Enter Username  : " username
                         read -p "Enter Groupname : " group
         if id "$username" &>/dev/null;
-        then 
-            usermod -aG "$group" "$username" 
-            echo "User Add to Group Successfully."
-        else 
-            echo "User Notfound."
-         fi                      
+        then
+            usermod -aG "$group" "$username"
+            echo -e "${green}${BOLD}✓ User added successfully.${RESET}"
+        else
+            echo -e "${RED}${BOLD}User not found.${RESET}"
+         fi
  }
- #------------------------------------------------------------------------------- 
+ #-------------------------------------------------------------------------------
 #============================================================================
 
     # Main Menu
 	while true
 	do
 echo "================================================================"
-echo -e "        ${YELLOW}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${ENDCOLOR}"
+echo -e "        ${YELLOW}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${RESET}"
 echo "================================================================"
     echo "1.  Create User"
     echo "2.  Delete User"
@@ -135,7 +139,7 @@ echo "================================================================"
             exit 0
             ;;
         *)
-            echo -e "${RED}Invalid Choice!${ENDCOLOR}"
+            echo -e "${RED}${BOLD}Invalid Choice!${RESET}"
             ;;
     esac
 
