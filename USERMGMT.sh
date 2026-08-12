@@ -48,7 +48,7 @@ ENDCOLOR='\e[0m'
 #============================================================================
 # 3 Change User Password Functin
     change_password(){
-        read -p "Enter Username : " username
+                        read -p "Enter Username : " username
         if id "$username" &>/dev/null;
         then
             passwd "$username"
@@ -59,6 +59,16 @@ ENDCOLOR='\e[0m'
     }
 #============================================================================
 # 4 Lock User Functin
+    lock_user() {
+                         read -p "Enter Username : " username
+        if id "$username" &>/dev/null;
+        then
+            passwd -l "$username"
+            echo "User Is Locked"
+        else    
+            echo "User Not Found"    
+         fi   
+             }
 #============================================================================
 # 5 Unlock User Functin
 #============================================================================
