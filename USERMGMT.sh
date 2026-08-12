@@ -10,33 +10,48 @@ ENDCOLOR='\e[0m'
 #---------------------------------------------------------------------------
 # Check Root Or Note
 
-if [ "$EUID"  -ne 0 ];
-then
-echo "Plese run as Root User (sudo)"
-exit 1
-fi
+	if [ "$EUID"  -ne 0 ];
+	then
+	echo "Plese run as Root User (sudo)"
+	exit 1
+	fi
 #-------------------------------------------------------------------------------
 #============================================================================
 # 1 Creat User Functin
-creat_user(){
-read -p "Enter Username : " username
-if id "$username" &>/dev/null;
-then
-echo "User already exists !"
-else
-useradd -m  "$username"
-passwd "$username"
-echo "User Created Successfully."
-log_action "Created user : $username"
-fi
-}
+	create_user(){
+			read -p "Enter Username : " username
+	if id "$username" &>/dev/null;
+	then
+		echo "User already exists !"
+	else
+		useradd -m  "$username"
+		passwd "$username"
+		echo "User Created Successfully."
+		log_action "Created user : $username"
+	fi
+	}
 #============================================================================
-# Main Menu
-while true
-do
-    echo "================================================================"
-    echo -e "        ${YELLOW}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${ENDCOLOR}"
-    echo "================================================================"
+# 2 Delete User Functin
+#============================================================================	
+#============================================================================
+# 3 Change User Password Functin
+#============================================================================
+#============================================================================
+# 4 Lock User Functin
+#============================================================================
+#============================================================================
+# 5 Unlock User Functin
+#============================================================================
+#============================================================================
+# 6 dd User to Group Functin
+#============================================================================
+
+    # Main Menu
+	while true
+	do
+echo "================================================================"
+echo -e "        ${YELLOW}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${ENDCOLOR}"
+echo "================================================================"
     echo "1.  Create User"
     echo "2.  Delete User"
     echo "3.  Change User Password"
