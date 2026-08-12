@@ -41,12 +41,22 @@ ENDCOLOR='\e[0m'
                 userdel -r "$username"
                 echo "User Is Deleted..."
         else    
-                echo "User Not Exisist"
+                echo "User Not found"
         fi
     }
 #-------------------------------------------------------------------------------    
 #============================================================================
 # 3 Change User Password Functin
+    change_password(){
+        read -p "Enter Username : " username
+        if id "$username" &>/dev/null;
+        then
+            passwd "$username"
+            echo "Password Was Changed"
+        else    
+            echo "User Not Found"    
+         fi   
+    }
 #============================================================================
 # 4 Lock User Functin
 #============================================================================
