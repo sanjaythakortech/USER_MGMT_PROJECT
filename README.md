@@ -84,4 +84,4 @@ screenshots/
 
 **Sanjay Thakor**
 
-`Linux Administration` • `Bash Scripting` • `DevOps Learner`
+`Linux Administration` • `Bash Scripting`
