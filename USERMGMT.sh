@@ -71,6 +71,16 @@ ENDCOLOR='\e[0m'
              }
 #============================================================================
 # 5 Unlock User Functin
+ unlock_user() {
+                         read -p "Enter Username : " username
+        if id "$username" &>/dev/null;
+        then
+            passwd -u "$username"
+            echo "User Is Unlocked"
+        else    
+            echo "User Not Found"    
+         fi   
+             }
 #============================================================================
 # 6 Add User to Group Functin
 #============================================================================
