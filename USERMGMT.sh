@@ -16,6 +16,21 @@ echo "Plese run as Root User (sudo)"
 exit 1
 fi
 #-------------------------------------------------------------------------------
+#============================================================================
+# 1 Creat User Functin
+creat_user(){
+read -p "Enter Username : " username
+if id "$username" &>/dev/null;
+then
+echo "User already exists !"
+else
+useradd -m  "$username"
+passwd "$username"
+echo "User Created Successfully."
+log_action "Created user : $username"
+fi
+}
+#============================================================================
 # Main Menu
 while true
 do
