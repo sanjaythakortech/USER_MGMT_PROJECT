@@ -77,7 +77,7 @@ MAGENTA='\e[35m'
 #----------------------------------------------------------------------------
 #============================================================================
 # 5 Unlock User Functin
- unlock_user() {
+    unlock_user() {
                          read -p "Enter Username : " username
         if id "$username" &>/dev/null;
         then
@@ -90,7 +90,7 @@ MAGENTA='\e[35m'
 #-------------------------------------------------------------------------------
 #============================================================================
 # 6 Add User to Group Functin
- add_user_to_group() {
+    add_user_to_group() {
                         read -p "Enter Username  : " username
                         read -p "Enter Groupname : " group
         if id "$username" &>/dev/null;
@@ -109,7 +109,7 @@ MAGENTA='\e[35m'
  #-------------------------------------------------------------------------------
 #============================================================================
 # 7 Remove User to Group Functin
- remove_user_from_group(){
+    remove_user_from_group(){
                             read -p "Enter Username  : " username
                             read -p "Enter Groupname : " group
         if id "$username" &>/dev/null;
