@@ -95,20 +95,42 @@ MAGENTA='\e[35m'
                         read -p "Enter Groupname : " group
         if id "$username" &>/dev/null;
         then
-            usermod -aG "$group" "$username"
-            echo -e "${green}${BOLD}✓ User added successfully.${RESET}"
+                if getent group "$group" &>/dev/null;
+                then
+                usermod -aG "$group" "$username"
+                echo -e "${green}${BOLD}✓ User added successfully.${RESET}"
+            else   
+                echo -e "${RED}${BOLD}Group not found.${RESET}"
+                fi    
         else
             echo -e "${RED}${BOLD}User not found.${RESET}"
-         fi
+        fi
  }
  #-------------------------------------------------------------------------------
 #============================================================================
-
+# 7 Remove User to Group Functin
+ remove_user_from_group(){
+                            read -p "Enter Username  : " username
+                            read -p "Enter Groupname : " group
+        if id "$username" &>/dev/null;
+        then
+            if getent group "$group" >/dev/null;
+                then
+                    gpasswd -d "$username" "$group"
+                    echo -e "${GREEN}${BOLD}User removed from Group Successfully.${RESET}"
+                    else    
+                            echo -e "${RED}${BOLD}Group Not Found. ${RESET}"
+                     fi
+        else
+            echo -p "${RED}${BOLD}User Not Found. ${RESET}" 
+        fi                      
+    }
+#============================================================================
     # Main Menu
 	while true
 	do
 echo "================================================================"
-echo -e "        ${YELLOW}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${RESET}"
+echo -e "        ${YELLOW}${BOLD}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${RESET}"
 echo "================================================================"
     echo "1.  Create User"
     echo "2.  Delete User"
