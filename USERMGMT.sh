@@ -98,14 +98,20 @@ MAGENTA='\e[35m'
                 if getent group "$group" &>/dev/null;
                 then
                 usermod -aG "$group" "$username"
-                echo -e "${green}${BOLD}✓ User added successfully.${RESET}"
+                echo -e "${GREEN}${BOLD}✓ $username User added to $group group successfully.${RESET}"
+                echo "================================="
+                echo -e "${CYAN}${BOLD} USERS     GROUPS ${RESET}"
+                echo "---------------------------------"
+                echo  " $username =  $(id -nG $username) "
+                echo "================================="
+                
             else   
                 echo -e "${RED}${BOLD}Group not found.${RESET}"
                 fi    
         else
             echo -e "${RED}${BOLD}User not found.${RESET}"
         fi
- }
+ } 
  #-------------------------------------------------------------------------------
 #============================================================================
 # 7 Remove User to Group Functin
@@ -118,6 +124,11 @@ MAGENTA='\e[35m'
                 then
                     gpasswd -d "$username" "$group"
                     echo -e "${GREEN}${BOLD}User removed from Group Successfully.${RESET}"
+                    echo "================================="
+                    echo -e "${CYAN}${BOLD} USERS     GROUPS ${RESET}"
+                    echo "---------------------------------"
+                    echo  " $username =  $(id -nG $username) "
+                    echo "================================="
                     else    
                             echo -e "${RED}${BOLD}Group Not Found. ${RESET}"
                      fi
@@ -126,13 +137,35 @@ MAGENTA='\e[35m'
         fi                      
     }
 #============================================================================
+# 8 User information Functin
+ user_info() {
+                read -p "Enter Username : " username
+            if id "$username" &>/dev/null;
+            then
+                echo "================================="
+                echo -e "${CYAN}${BOLD}USER INFORMATION${RESET}"
+                echo "================================="
+                echo -e "${YELLOW}Username        :${RESET} $username"
+                echo -e "${YELLOW}User ID         :${RESET} $(id -u "$username")"
+                echo -e "${YELLOW}Groups          :${RESET} $(id -nG "$username")"
+                echo "---------------------------------"
+
+            else
+                echo "User not found."
+            fi            
+            }
+
+
+#============================================================================
+
+#============================================================================
     # Main Menu
 	while true
 	do
 echo "================================================================"
 echo -e "        ${YELLOW}${BOLD}USER MANAGEMENT SYSTEM BY SANJAY THAKOR${RESET}"
 echo "================================================================"
-    echo "1.  Create User"
+    echo "1.  Create User"/n
     echo "2.  Delete User"
     echo "3.  Change User Password"
     echo "4.  Lock User"
